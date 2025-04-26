@@ -1,11 +1,9 @@
-import Rating from './Rating';
-
 const FeedbackItem = ({ feedback, onDelete }) => {
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
-  
+
   return (
     <div className="feedback-item">
       <div className="feedback-content">
@@ -22,5 +20,3 @@ const FeedbackItem = ({ feedback, onDelete }) => {
     </div>
   );
 };
-
-export default FeedbackItem;

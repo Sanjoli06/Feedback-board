@@ -1,5 +1,3 @@
-import FeedbackItem from './FeedbackItem';
-
 const FeedbackList = ({ feedbacks, onDelete }) => {
   if (!feedbacks || feedbacks.length === 0) {
     return (
@@ -8,7 +6,7 @@ const FeedbackList = ({ feedbacks, onDelete }) => {
       </div>
     );
   }
-  
+
   return (
     <div className="card">
       <h2 className="card-title">Recent Feedback</h2>
@@ -19,5 +17,3 @@ const FeedbackList = ({ feedbacks, onDelete }) => {
     </div>
   );
 };
-
-export default FeedbackList;

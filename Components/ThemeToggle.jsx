@@ -5,5 +5,3 @@ const ThemeToggle = ({ onToggle, currentTheme }) => {
     </button>
   );
 };
-
-export default ThemeToggle;

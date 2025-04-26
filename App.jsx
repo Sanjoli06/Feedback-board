@@ -1,34 +1,29 @@
-import ThemeToggle from './Components/ThemeToggle';
-import FeedbackForm from './Components/FeedbackForm';
-import FeedbackList from './Components/FeedbackList';
-
-function App() {
+const App = () => {
   const [theme, setTheme] = React.useState(localStorage.getItem("theme") || "light");
   const [feedbacks, setFeedbacks] = React.useState([]);
-  
+
   const fetchFeedbacks = async () => {
     try {
       const res = await fetch("https://hello-ec906-default-rtdb.firebaseio.com/feedbacks.json");
       const data = await res.json();
       const loadedFeedbacks = [];
-      
+
       if (data) {
         for (const key in data) {
           loadedFeedbacks.push({ id: key, ...data[key] });
         }
       }
-      
       setFeedbacks(loadedFeedbacks);
     } catch (error) {
       console.error("Error fetching feedback:", error);
     }
   };
-  
+
   React.useEffect(() => {
     fetchFeedbacks();
     document.body.className = theme;
   }, [theme]);
-  
+
   const addFeedbackHandler = async (feedback) => {
     try {
       await fetch("https://hello-ec906-default-rtdb.firebaseio.com/feedbacks.json", {
@@ -41,7 +36,7 @@ function App() {
       console.error("Error adding feedback:", error);
     }
   };
-  
+
   const deleteFeedbackHandler = async (id) => {
     try {
       await fetch(`https://hello-ec906-default-rtdb.firebaseio.com/feedbacks/${id}.json`, {
@@ -52,14 +47,14 @@ function App() {
       console.error("Error deleting feedback:", error);
     }
   };
-  
+
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
     document.body.className = newTheme;
   };
-  
+
   return (
     <div className="container">
       <header className="header">
@@ -70,6 +65,4 @@ function App() {
       <FeedbackList feedbacks={feedbacks} onDelete={deleteFeedbackHandler} />
     </div>
   );
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+};
